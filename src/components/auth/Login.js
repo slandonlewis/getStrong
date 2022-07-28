@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom"
 import "./Login.css"
 import logo from './logo.png'
+import { Register } from "./Register";
 
 export const Login = () => {
     const [email, set] = useState("slandonlewis@gmail.com")
@@ -17,7 +18,8 @@ export const Login = () => {
                 if (foundUsers.length === 1) {
                     const user = foundUsers[0]
                     localStorage.setItem("active_user", JSON.stringify({
-                        id: user.id
+                        id: user.id,
+                        isAdmin: user.isAdmin
                     }))
 
                     navigate("/")
@@ -51,7 +53,11 @@ export const Login = () => {
                 </form>
             </section>
             <section className="link--register">
-                <Link to="/register">Create New User</Link>
+                <Link to="/Register">
+                    <button>
+                        CREATE NEW USER
+                    </button>
+                </Link>
             </section>
         </main>
     )
