@@ -1,0 +1,11 @@
+.sessions {
+    display: flex;
+    flex-direction: column;
+}
+
+.session {
+    background-color: rgb(160, 244, 255);
+    border: 1px dotted rgb(0, 65, 139);
+    padding: 0.7rem;
+    margin: 0.5rem 0;
+}

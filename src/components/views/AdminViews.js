@@ -19,6 +19,7 @@ export const AdminViews = () => {
             </Route>
                 <Route path="newsession" element={ <NewSession /> } />
                 <Route path="traininglog" element={ <TrainingLog /> } />
+                <Route path="manageusers" element={ <ManageUsers /> } />
         </Routes>
     )
 }

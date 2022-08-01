@@ -1,5 +1,7 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
+import Exercises from "./Exercises.js"
+
 
 export const NewSession = () => {
     /*
@@ -7,8 +9,7 @@ export const NewSession = () => {
         initial state object
     */
     const [session, update] = useState({
-        description: "",
-        emergency: false
+        name: ''
     })
     /*
         TODO: Use the useNavigation() hook so you can redirect
@@ -23,7 +24,7 @@ export const NewSession = () => {
         event.preventDefault()
         // TODO: Create the object to be saved to the API
         const sessionToSendToAPI = {
-            id: localUserObject.id,
+            userId: localUserObject.id,
             name: session.name,
             dateCompleted: ""
         }
@@ -38,7 +39,7 @@ export const NewSession = () => {
         })
             .then(response => response.json())
             .then(() => {
-                navigate("/sessions")
+                navigate("/sessions/exercises")
             })
     }
 
@@ -47,7 +48,7 @@ export const NewSession = () => {
             <h2 className="sessionForm__title">New Session</h2>
             <fieldset>
                 <div className="form-group">
-                    <label htmlFor="description">Session Name: </label>
+                    <label htmlFor="session-name">Session Name: </label>
                     <input
                         required autoFocus
                         type="text"
@@ -55,17 +56,23 @@ export const NewSession = () => {
                         placeholder="Ex: Chest Day"
                         value={session.name}
                         onChange={
-                            (evt)=> {
-                                const copy = {...session}
+                            (evt) => {
+                                const copy = { ...session }
                                 copy.name = evt.target.value
                                 update(copy)
                             }
                         } />
                 </div>
             </fieldset>
-            
 
-            <button 
+            {/* <fieldset>
+                <h3>Exercises</h3>
+                <p>Enter an exercise</p>
+                <Exercises />
+            </fieldset> */}
+
+
+            <button
                 onClick={(clickEvent) => handleSaveButtonClick(clickEvent)}
                 className="btn btn-primary">
                 SAVE SESSION

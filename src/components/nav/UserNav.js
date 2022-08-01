@@ -1,29 +1,51 @@
-import { Link, useNavigate } from "react-router-dom"
+import { Link, useNavigate, Route, Routes } from "react-router-dom"
 import "./NavBar.css"
+import "../GetStrong.css"
+import logo from './logo.png'
+
+// const navbarLinks = document.querySelector('.navbar')
 
 export const UserNav = () => {
     const navigate = useNavigate()
-
+    // const navbarLinks = document.querySelector('.navbar')
     return (
-        <ul className="navbar">
-            <li className="navbar__item active">
-                <Link className="navbar__link" to="/tickets">Tickets</Link>
-            </li>
+        <nav className="nav">
+            <div>
+                <img src={logo} className="logoNavStyle"></img>
+            </div>
 
-            <li className="navbar__item active">
-                <Link className="navbar__link" to="/profile">Profile</Link>
-            </li>
+            <a href="#" className="toggle-btn" onClick={
+                () => {
+                    const navbarLinks = document.getElementsByClassName('navbar')
+                    navbarLinks.classList.toggle('hide')
+                }
+            }>
+                <span className="bar"></span>
+                <span className="bar"></span>
+                <span className="bar"></span>
+            </a>
 
-            {
-                localStorage.getItem("active_user")
-                    ? <li className="navbar__item navbar__logout">
-                        <Link className="navbar__link" to="" onClick={() => {
-                            localStorage.removeItem("active_user")
-                            navigate("/", {replace: true})
-                        }}>Logout</Link>
-                    </li>
-                    : ""
-            }
-        </ul>
+            <ul id="navbar" className="hide">
+                <li className="navbar__item active">
+                    <Link className="navbar__link" to="/">Dashboard</Link>
+                </li>
+
+                <li className="navbar__item active">
+                    <Link className="navbar__link" to="/calc">Weight Calculator</Link>
+                </li>
+
+                {
+                    localStorage.getItem("active_user")
+                        ? <li className="navbar__item navbar__logout">
+                            <Link className="navbar__link" to="" onClick={() => {
+                                localStorage.removeItem("active_user")
+                                navigate("/", { replace: true })
+                            }}>Logout</Link>
+                        </li>
+                        : ""
+                }
+            </ul>
+        </nav>
     )
 }
+

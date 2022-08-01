@@ -1,9 +1,12 @@
 import { Link, Outlet, Route, Routes } from "react-router-dom"
 import { NewSession } from '../sessions/NewSession'
 import { TrainingLog } from "../sessions/TrainingLog"
+import "../GetStrong.css"
+import { WeightCalculator } from "../sessions/WeightCalculator"
+import logo from './logo.png'
 
 export const UserViews = () => {
-	return (
+    return (
         <Routes>
             <Route path="/" element={
                 <>
@@ -18,6 +21,7 @@ export const UserViews = () => {
             </Route>
                 <Route path="newsession" element={ <NewSession /> } />
                 <Route path="traininglog" element={ <TrainingLog /> } />
+                <Route path="calc" element={ <WeightCalculator /> } />
         </Routes>
     )
 }

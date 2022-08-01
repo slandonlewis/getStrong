@@ -15,7 +15,7 @@ export const GetStrong = () => {
 		<Route path="*" element={
 			<Authorized>
 				<>
-					{/* <NavBar /> */}
+					<NavBar />
 					<ApplicationViews />
 				</>
 			</Authorized>
