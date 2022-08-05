@@ -11,14 +11,18 @@ export const TrainingLog = () => {
 
     useEffect(
         () => {
-            fetch(`http://localhost:4000/sessions`)
-                .then(response => response.json())
-                .then((sessionArray) => {
-                    setSessions(sessionArray)
-                })
+            getAllSessions()
         },
         []
     )
+
+    const getAllSessions = () => {
+        fetch(`http://localhost:4000/sessions`)
+            .then(response => response.json())
+            .then((sessionArray) => {
+                setSessions(sessionArray)
+            })
+    }
 
     useEffect(
         () => {
@@ -27,6 +31,21 @@ export const TrainingLog = () => {
         },
         [sessions]
     )
+
+    const deleteSession = (session) => {
+        fetch(`http://localhost:4000/sessions/${session.id}`, {
+            method: "DELETE"
+        })
+            .then(() => {
+                getAllSessions()
+            })
+    }
+
+    const navigate = useNavigate()
+    const viewSession = (session) => {
+        navigate(`/sessions/${session.id}/exercises`)
+    }
+
 
     return (
         <>
@@ -39,7 +58,9 @@ export const TrainingLog = () => {
                         (session) => {
                             return <section className="session">
                                 <h3>{session.name}</h3>
-                                <button>View</button>
+                                <p>Date Created: {session.dateCompleted}</p>
+                                <button onClick={() => viewSession(session)}>View</button>
+                                <button onClick={() => deleteSession(session)}>🗑️</button>
                             </section>
                         }
                     )

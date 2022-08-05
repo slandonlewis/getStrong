@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { useNavigate } from "react-router-dom"
+import { Route, useNavigate, Routes } from "react-router-dom"
 import Exercises from "./Exercises.js"
 
 
@@ -20,13 +20,15 @@ export const NewSession = () => {
     const localUser = localStorage.getItem("active_user")
     const localUserObject = JSON.parse(localUser)
 
-    const handleSaveButtonClick = (event) => {
+    const handleCreateButtonClick = (event) => {
         event.preventDefault()
         // TODO: Create the object to be saved to the API
+        const current = new Date()
+        const date = `${current.getMonth()+1}/${current.getDate()}/${current.getFullYear()}`
         const sessionToSendToAPI = {
             userId: localUserObject.id,
             name: session.name,
-            dateCompleted: ""
+            dateCompleted: date
         }
 
         // TODO: Perform the fetch() to POST the object to the API
@@ -38,45 +40,42 @@ export const NewSession = () => {
             body: JSON.stringify(sessionToSendToAPI)
         })
             .then(response => response.json())
-            .then(() => {
-                navigate("/sessions/exercises")
+            .then((response) => {
+
+                navigate(`/sessions/${response.id}/exercises`)
             })
     }
 
     return (
-        <form className="sessionForm">
-            <h2 className="sessionForm__title">New Session</h2>
-            <fieldset>
-                <div className="form-group">
-                    <label htmlFor="session-name">Session Name: </label>
-                    <input
-                        required autoFocus
-                        type="text"
-                        className="form-control"
-                        placeholder="Ex: Chest Day"
-                        value={session.name}
-                        onChange={
-                            (evt) => {
-                                const copy = { ...session }
-                                copy.name = evt.target.value
-                                update(copy)
-                            }
-                        } />
-                </div>
-            </fieldset>
-
-            {/* <fieldset>
-                <h3>Exercises</h3>
-                <p>Enter an exercise</p>
-                <Exercises />
-            </fieldset> */}
+        <>
+            <form className="sessionForm">
+                <h2 className="sessionForm__title">New Session</h2>
+                <fieldset>
+                    <div className="form-group">
+                        <label htmlFor="session-name">Session Name: </label>
+                        <input
+                            required autoFocus
+                            type="text"
+                            className="form-control"
+                            placeholder="Ex: Chest Day"
+                            value={session.name}
+                            onChange={
+                                (evt) => {
+                                    const copy = { ...session }
+                                    copy.name = evt.target.value
+                                    update(copy)
+                                }
+                            } />
+                    </div>
+                </fieldset>
 
 
-            <button
-                onClick={(clickEvent) => handleSaveButtonClick(clickEvent)}
-                className="btn btn-primary">
-                SAVE SESSION
-            </button>
-        </form>
+                <button
+                    onClick={(clickEvent) => handleCreateButtonClick(clickEvent)}
+                    className="btn btn-primary">
+                    CREATE SESSION
+                </button>
+            </form>
+        </>
     )
 }

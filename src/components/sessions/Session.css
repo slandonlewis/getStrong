@@ -9,3 +9,12 @@
     padding: 0.7rem;
     margin: 0.5rem 0;
 }
+
+.exerciseDisplay {
+    display: flex;
+    flex-direction: row;
+}
+
+.calculatorPage {
+    text-align: center;
+}
