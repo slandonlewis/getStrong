@@ -30,12 +30,15 @@ export default function Exercise({ exercise }) {
       .then(() => {
         getAllExistingExercises()
       })
+      .then(()=> {
+        window.location.reload()
+      })
   }
   return (
     <>
       {exercise &&
         exercise.sessionId === sessionID ?
-        <p className='lift'><b>{exercise.name}:</b> {exercise.load} LBS - {exercise.sets} x {exercise.reps} <button onClick={() => deleteExercise(exercise)}>🗑️</button>
+        <p className='lift'><b>{exercise.name}:</b> {exercise.load} LBS - {exercise.sets} x {exercise.reps} , <i>Type: {exercise.type}</i> <button onClick={() => deleteExercise(exercise)}>🗑️</button>
         </p>
         : ''
       }

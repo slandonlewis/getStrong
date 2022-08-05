@@ -84,3 +84,11 @@
     color: rgb(145, 0, 0);
     font-style: italic;
 }
+
+.bodyweightCheckbox {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    font-style: italic;
+    font-weight: 600
+}

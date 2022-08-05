@@ -10,6 +10,7 @@ export default function Exercises() {
     const [inputWeight, setWeight] = useState(0)
     const [inputSets, setSets] = useState(0)
     const [inputReps, setReps] = useState(0)
+    const [inputType, setType] = useState('Barbell')
     const location = useLocation()
     const sessionId = parseInt(location.pathname.split('/')[2])
 
@@ -51,7 +52,8 @@ export default function Exercises() {
             "name": inputName,
             "load": inputWeight,
             "sets": inputSets,
-            "reps": inputReps
+            "reps": inputReps,
+            "type": inputType
         }
 
         return fetch(`http://localhost:4000/exercises`, {
@@ -62,7 +64,7 @@ export default function Exercises() {
             body: JSON.stringify(exercisesToSendToAPI)
         })
             .then(response => response.json())
-            .then(() => {getAllExistingExercises()})
+            .then(() => { getAllExistingExercises() })
     }
 
     // const updateExercises 
@@ -81,6 +83,19 @@ export default function Exercises() {
 
                 <h4>Reps</h4>
                 <input value={inputReps} onInput={e => setReps(parseInt(e.target.value))} type="number" placeholder='Ex: 8 Reps' />
+
+                <div className='bodyweightCheckbox'>
+                    <p>Type: </p>
+                    <select name="exercise-type" 
+                    onChange={(e) => {
+                        setType(e.target.value)
+                    }}>
+                        <option value="Barbell">Barbell</option>
+                        <option value="Dumbell">Dumbell</option>
+                        <option value="Machine">Machine</option>
+                        <option value="Bodyweight">Bodyweight</option>
+                    </select>
+                </div>
                 <br></br>
                 <button onClick={() => handleAddExercise()}>Add Exercise</button>
             </section>
