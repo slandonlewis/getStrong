@@ -48,7 +48,7 @@ export const TrainingLog = () => {
 
 
     return (
-        <>
+        <div className="training-log">
             <h1>Training Log</h1>
             <h3>View all of your logged sessions here</h3>
 
@@ -66,6 +66,6 @@ export const TrainingLog = () => {
                     )
                 }
             </article>
-        </>
+        </div>
     )
 }

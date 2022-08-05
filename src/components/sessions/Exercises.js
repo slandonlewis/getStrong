@@ -84,7 +84,7 @@ export default function Exercises() {
                 <h4>Reps</h4>
                 <input value={inputReps} onInput={e => setReps(parseInt(e.target.value))} type="number" placeholder='Ex: 8 Reps' />
 
-                <div className='bodyweightCheckbox'>
+                <div className='typeCheckbox'>
                     <p>Type: </p>
                     <select name="exercise-type" 
                     onChange={(e) => {

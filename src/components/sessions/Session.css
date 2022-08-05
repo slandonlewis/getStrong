@@ -5,7 +5,7 @@
 
 .session {
     background-color: rgb(160, 244, 255);
-    border: 1px dotted rgb(0, 65, 139);
+    border-radius: 10px;
     padding: 0.7rem;
     margin: 0.5rem 0;
 }
@@ -16,5 +16,9 @@
 }
 
 .calculatorPage {
+    text-align: center;
+}
+
+.training-log {
     text-align: center;
 }
